@@ -6,11 +6,6 @@ import java.io.IOException;
 import java.util.*;
 
 public class Answer {
-//
-//    //    String title;
-//    int sum;
-//    public static final File txtFile = new File("categories.tsv");
-
 
     public static Map<String, String> Categ(File txtFile) throws IOException {
         Map<String, String> categories = new HashMap<>();
@@ -25,32 +20,22 @@ public class Answer {
         return categories;
     }
 
-    public static Map<String, Integer> Answ(ArrayList<Pokupki> pokupki, Map<String, String> map) {
+    public static Map<String, Integer> Answ(ArrayList<Pokupki> pokupki, Map<String, String> map) throws NullPointerException {
         Map<String, Integer> map1 = new HashMap<>();
-        String category = null;
-        Integer allSum = null;
-        for (Pokupki pokupka :
-                pokupki) {
-            if (map.containsKey(pokupka.getTitle())) {
-                category = map.get(pokupka.getTitle());
+        String category;
 
-                if (allSum == null) {
-                    allSum = pokupka.getSum();
-                } else {
-                    allSum += pokupka.getSum();
+        for (Pokupki pokupka : pokupki) {
+            category = map.containsKey(pokupka.getTitle()) ? map.get(pokupka.getTitle()) : "другое";
+            Integer allSum;
 
-                }
+            if (map1.get(category) == null) {
+                allSum = pokupka.getSum();
                 map1.put(category, allSum);
-                allSum = null;
             } else {
-                category = "другое";
-                if (allSum == null) {
-                    allSum = pokupka.getSum();
-                } else {
-                    allSum += pokupka.getSum();
-                }
+                allSum = map.containsKey(pokupka.getTitle()) ? map1.get(category) : 0;
+
+                allSum += pokupka.getSum();
                 map1.put(category, allSum);
-                allSum = null;
             }
         }
         return map1;

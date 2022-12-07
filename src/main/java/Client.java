@@ -29,7 +29,7 @@ public class Client {
                      BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));) {
                     System.out.println("New connected accepted");
                     out.println(a);
-//                    System.out.println(a);
+                    System.out.println(a);
                     name = in.readLine();
                     System.out.println(name);
 
